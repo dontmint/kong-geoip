@@ -1,15 +1,14 @@
-package = "kong-plugin-geoip"
+package = "kong-geoip"
 version = "0.1.0-0" 
-local pluginName = package:match("^kong%-plugin%-(.+)$")
+local pluginName = package:match("^kong%-(.+)$")
 supported_platforms = {"linux", "macosx"}
 source = {
-  url = "git://github.com/newageio/kong-plugin-geoip",
-  tag = "0.1.0"
+  url = "git://github.com/dontmint/kong-geoip.git",
+  tag = "master"
 }
 
 description = {
   summary = "Working with MaxMind's GeoIP Lib",
-  homepage = "http://newage.io",
   license = "MIT"
 }
 
@@ -20,7 +19,7 @@ dependencies = {
 build = {
   type = "builtin",
   modules = {
-    ["kong.plugins."..pluginName..".handler"] = "kong/plugins/"..pluginName.."/handler.lua",
-    ["kong.plugins."..pluginName..".schema"] = "kong/plugins/"..pluginName.."/schema.lua",
+    ["kong.plugins."..pluginName..".handler"] = "./handler.lua",
+    ["kong.plugins."..pluginName..".schema"] = "./schema.lua",
   }
 }
