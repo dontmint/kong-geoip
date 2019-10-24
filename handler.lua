@@ -24,13 +24,12 @@ function plugin:access(conf)
   plugin.super.access(self)
   local current_ip = ngx.var.remote_addr
   local country_code = geoip_country.open(geoip_country_filename):query_by_addr(current_ip).code
-  kong.log.err("Plugin config type : ", type(conf))
+--[DEBUG]  kong.log.err("Plugin config type : ", type(conf))
 
   if conf.mode == "Blacklist" then 
     for i,line in ipairs(conf.blacklist_countries) do
       if line == country_code then
         block = 1
-        kong.log.err("Block country : ", line )
       end
     end
   elseif conf.mode == "Whitelist" then
