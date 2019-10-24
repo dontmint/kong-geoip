@@ -21,28 +21,28 @@ end
 
 -- Access Phase
 function plugin:access(conf)
+  plugin.super.access(self)
   local current_ip = ngx.var.remote_addr
   local country_code = geoip_country.open(geoip_country_filename):query_by_addr(current_ip).code
-  ngx.log(ngx.ERR, "Plugin config type : ", type(conf))
-  for i,line in ipairs(conf.blacklist_countries) do
-    if line == country_code then
-      block = 1
-      ngx.log(ngx.ERR, "Block country : ", line )
+  kong.log.err("Plugin config type : ", type(conf))
+
+  if conf.mode == "Blacklist" then 
+    for i,line in ipairs(conf.blacklist_countries) do
+      if line == country_code then
+        block = 1
+        kong.log.err("Block country : ", line )
+      end
     end
-  end
-  -- Unblocking ips in whitelist
---[[
-  if not conf.whitelist_ips then
-    for i,line in ipairs(conf.whitelist_ips) do
-      if line == current_ip then
+  elseif conf.mode == "Whitelist" then
+    block = 1
+    for i,line in ipairs(conf.whitelist_countries) do
+      if line == country_code then
         block = 0
       end
     end
   end
-]]
+  
   if block == 1 then 
-    -- return ngx.exit(ngx.HTTP_ILLEGAL) 
---    return responses.send_HTTP_FORBIDDEN()
     kong.response.exit(403, "Access Forbiden")
   end
 end
