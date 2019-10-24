@@ -1,8 +1,21 @@
 
+local typedefs = require "kong.db.schema.typedefs"
+
 return {
-  fields = {
-    whitelist_ips = {type = "array"},
-    blacklist_countries = {type = "array"},
-    whitelist_countries = {type = "array"}
-  }
+    name = "geoip",
+    fields = {
+        { config = {
+            type = "record",
+            fields = { 
+              { whitelist_countries = { type = "array", elements = {type = "string" } }, },
+              { blacklist_countries = { type = "array", elements = {type = "string" } }, },
+              { mode = {
+                  type = "string",
+                  default = "Whitelist",
+                  one_of = { "Whitelist", "Blacklist" },
+              }, },
+            },
+          },
+        },
+    }
 }

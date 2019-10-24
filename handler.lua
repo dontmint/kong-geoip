@@ -21,7 +21,6 @@ end
 
 -- Access Phase
 function plugin:access(conf)
-  plugin.super.access(self)
   local current_ip = ngx.var.remote_addr
   local country_code = geoip_country.open(geoip_country_filename):query_by_addr(current_ip).code
   ngx.log(ngx.ERR, "Plugin config type : ", type(conf))
@@ -32,6 +31,7 @@ function plugin:access(conf)
     end
   end
   -- Unblocking ips in whitelist
+--[[
   if not conf.whitelist_ips then
     for i,line in ipairs(conf.whitelist_ips) do
       if line == current_ip then
@@ -39,7 +39,7 @@ function plugin:access(conf)
       end
     end
   end
-
+]]
   if block == 1 then 
     -- return ngx.exit(ngx.HTTP_ILLEGAL) 
 --    return responses.send_HTTP_FORBIDDEN()
