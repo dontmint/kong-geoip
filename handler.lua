@@ -24,8 +24,14 @@ function plugin:access(conf)
 	if not country then
 		kong.log.err("Plugin DEBUG message : Country not found : ", ngx.var.remote_addr)
 		return
-  	end 
+  	end
 
+	-- INJECT HEADER 
+	if conf.inject_header ~= nil then 
+		kong.service.request.set_header(conf.inject_header, country["country_code"])
+	end
+
+	-- BLOCK IP IF MATCH RULES
   	local block = 0
   	if ( conf.mode == "Blacklist" and conf.blacklist_countries ~= nil ) then 
 		local country_code = country["country_code"]

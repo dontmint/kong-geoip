@@ -12,10 +12,6 @@ description = {
   license = "MIT"
 }
 
-dependencies = {
-  'lua-geoip >= 0.2-1'
-}
-
 build = {
   type = "builtin",
   modules = {

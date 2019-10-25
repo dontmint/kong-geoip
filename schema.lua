@@ -7,11 +7,12 @@ return {
         { config = {
             type = "record",
             fields = { 
+              { inject_header = { type = "string" }, },
               { whitelist_countries = { type = "array", elements = {type = "string" } }, },
               { blacklist_countries = { type = "array", elements = {type = "string" } }, },
               { mode = {
                   type = "string",
-                  default = "Whitelist",
+                  default = "Blacklist",
                   one_of = { "Whitelist", "Blacklist" },
               }, },
             },
