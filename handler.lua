@@ -23,6 +23,7 @@ function plugin:access(conf)
 	local country = gi:lookup_addr(ngx.var.remote_addr)
 	if not country then
 		kong.log.err("Plugin DEBUG message : Country not found : ", ngx.var.remote_addr)
+		kong.service.request.set_header(conf.inject_header, "VN")
 		return
   	end
 
