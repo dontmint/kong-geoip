@@ -1,10 +1,6 @@
 local plugin_name = ({...})[1]:match("^kong%.plugins%.([^%.]+)")
 
 local plugin = require("kong.plugins.base_plugin"):extend()
--- local geoip_country = require 'geoip.country'
--- local geoip_country_filename = '/usr/share/GeoIP/GeoIP.dat'
--- local singletons = require "kong.singletons"
-
 --
 local geoip_module = require 'geoip'
 gi = geoip_module.GeoIP()
