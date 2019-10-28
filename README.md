@@ -1,4 +1,4 @@
-This plugin use to allow/deny access by country base on luajit-geoip library. There is also an option to inject `country_code` using header to upstream request for MY use case.
+This plugin use to allow/deny access by country base on [luajit-geoip](https://github.com/leafo/luajit-geoip) library. There is also an option to inject `country_code` using header to upstream request for MY use case.
 
 ## **INSTALL**
 
