@@ -1,6 +1,6 @@
 ## **INSTALL**
 
-* I. Dependencies
+* **I. Dependencies**
 
 **`geoip-devel >= 1.6.5`**
 > For CentOS 7, you can use these packages form Atomic Repo
@@ -26,7 +26,7 @@ luarocks install --server=http://luarocks.org/manifests/leafo geoip
 luarocks install ROCK/geoip-dev-1.all.rock
 ```
 
-* II. Install this Plugin
+* **II. Install this Plugin**
 ```
 git clone https://github.com/dontmint/kong-geoip.git
 cd kong-geoip
@@ -35,7 +35,7 @@ luarocks make
 
 ## **CONFIG PLUGIN**
 
-* III. Enable in Kong and restart
+* **III. Enable in Kong and restart**
 
 ```conf
 vim /etc/kong/kong.conf
@@ -48,7 +48,7 @@ plugins = bundled,geoip
 kong restart
 ```
 
-* IV. Plugin configuration 
+* **IV. Plugin configuration **
 
 **mode**
 + `Whitelist` : Block all country but allow `whitelist_countries`
