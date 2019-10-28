@@ -48,7 +48,7 @@ plugins = bundled,geoip
 kong restart
 ```
 
-* **IV. Plugin configuration **
+* **IV. Plugin configuration**
 
 **mode**
 + `Whitelist` : Block all country but allow `whitelist_countries`
