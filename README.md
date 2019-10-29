@@ -63,4 +63,5 @@ config.mode=Whitelist \
 config.Whitelist:=["VN","US"] \
 ```
 
+* To custom your geoip database, please follow commands in file `custom_geolite2.md` 
 

@@ -23,15 +23,18 @@ function plugin:access(conf)
 	local country = gi:lookup_addr(ngx.var.remote_addr)
 	if not country then
 		kong.log.err("Plugin DEBUG message : Country not found : ", ngx.var.remote_addr)
-		kong.service.request.set_header(conf.inject_header, "VN")
+		kong.service.request.set_header(conf.inject_country_header, "VN")
 		return
   	end
 
 	-- INJECT HEADER 
-	if conf.inject_header ~= nil then 
-		kong.service.request.set_header(conf.inject_header, country["country_code"])
+	if conf.inject_country_header ~= nil then 
+		kong.service.request.set_header(conf.inject_country_header, country["country_code"])
 	end
-
+	
+	if conf.inject_isp_header ~= nil then
+                kong.service.request.set_header(conf.inject_isp_header, mapISP(country["asnum"]) )
+        end
 	-- BLOCK IP IF MATCH RULES
   	local block = 0
   	if ( conf.mode == "Blacklist" and conf.blacklist_countries ~= nil ) then 
@@ -57,6 +60,31 @@ function plugin:access(conf)
   	end
 end
 
-plugin.PRIORITY = 991
+function mapISP(asnum)
+-- https://ipinfo.io/countries/vn
+isp = {   
+      	["FPT"] = { "AS18403", "AS45894", "AS131402" },
+        ["VNPT"] = {"AS45899","AS7643","AS135939","AS135965","AS45898"},
+	["VIETTEL"] = { "AS7552", "AS24086" },
+	["SPT"] = { "AS7602" },
+      }
+
+	for isp_name,table in pairs(isp) do
+		if contains(table, asnum) then
+			return isp_name	
+		end		
+	end
+	return "other"
+	
+end
+
+function contains(list, asn_string)
+        for _,v in ipairs(list) do
+                if string.match(asn_string, v) then return true end
+        end
+        return false
+end
+
+plugin.PRIORITY = 1994
 
 return plugin

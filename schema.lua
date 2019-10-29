@@ -7,7 +7,8 @@ return {
         { config = {
             type = "record",
             fields = { 
-              { inject_header = { type = "string" }, },
+              { inject_country_header = { type = "string" }, },
+	      { inject_isp_header = { type = "string" }, },
               { whitelist_countries = { type = "array", elements = {type = "string" } }, },
               { blacklist_countries = { type = "array", elements = {type = "string" } }, },
               { mode = {
