@@ -5,7 +5,7 @@ This plugin use to allow/deny access by country base on [luajit-geoip](https://g
 * **I. Dependencies**
 
 **`geoip-devel >= 1.6.5`**
-> For CentOS 7, you can use these packages form Atomic Repo
+> For CentOS 7, you can use these packages from Atomic Repo
 ```
 Download latest atomic-release rpm from
 # http://www6.atomicorp.com/channels/atomic/centos/7/x86_64/RPMS/
