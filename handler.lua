@@ -62,6 +62,9 @@ function plugin:access(conf)
 end
 
 function mapISP(asnum)
+if not asnum then
+  return "Unkown"
+end
 -- https://ipinfo.io/countries/vn
   isp = {
   ["FPT"] = { "AS18403", "AS45894", "AS131402" },
