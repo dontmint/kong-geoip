@@ -67,10 +67,10 @@ if not asnum then
 end
 -- https://ipinfo.io/countries/vn
   isp = {
-  ["FPT"] = { "AS18403", "AS45894", "AS131402" },
-  ["VNPT"] = {"AS45899","AS7643","AS135939","AS135965","AS45898"},
-  ["VIETTEL"] = { "AS7552", "AS24086" },
-	["SPT"] = { "AS7602" },
+  ["fpt"] = { "AS18403", "AS45894", "AS131402" },
+  ["vnpt"] = {"AS45899","AS7643","AS135939","AS135965","AS45898"},
+  ["viettel"] = { "AS7552", "AS24086" },
+	["spt"] = { "AS7602" },
 }
 
 for isp_name,table in pairs(isp) do 
